@@ -1,0 +1,309 @@
+* service-ipfs
+  :PROPERTIES:
+  :CUSTOM_ID: service-ipfs
+  :END:
+
+Description of my service
+
+* Contents
+  :PROPERTIES:
+  :CUSTOM_ID: contents
+  :END:
+
+- [[#Installation][Installation]]
+- [[#Definitions][Definitions]]
+
+  - [[#Events][Events]]
+
+    - [[#messagereceived][messageReceived]]
+    - [[#started][started]]
+    - [[#stopped][stopped]]
+
+  - [[#Tasks][Tasks]]
+
+    - [[#add][add]]
+    - [[#cat][cat]]
+    - [[#publish][publish]]
+    - [[#stop][stop]]
+    - [[#subscribe][subscribe]]
+
+* Installation
+  :PROPERTIES:
+  :CUSTOM_ID: installation
+  :END:
+
+** MESG Core
+   :PROPERTIES:
+   :CUSTOM_ID: mesg-core
+   :END:
+
+This service requires [[https://github.com/mesg-foundation/core][MESG
+Core]] to be installed first.
+
+You can install MESG Core by running the following command or
+[[https://docs.mesg.com/guide/start-here/installation.html][follow the
+installation guide]].
+
+#+BEGIN_SRC sh
+    bash <(curl -fsSL https://mesg.com/install)
+#+END_SRC
+
+** Service
+   :PROPERTIES:
+   :CUSTOM_ID: service
+   :END:
+
+Download the source code of this service, and then in the service's
+folder, run the following command:
+
+#+BEGIN_SRC sh
+    mesg-core service deploy
+#+END_SRC
+
+* Definitions
+  :PROPERTIES:
+  :CUSTOM_ID: definitions
+  :END:
+
+* Events
+  :PROPERTIES:
+  :CUSTOM_ID: events
+  :END:
+
+** messageReceived
+   :PROPERTIES:
+   :CUSTOM_ID: messagereceived
+   :END:
+
+Event key: =messageReceived=
+
+| *Name*      | *Key*       | *Type*     | *Description*   |
+|-------------+-------------+------------+-----------------|
+| *message*   | =message=   | =String=   |                 |
+| *topic*     | =topic=     | =String=   |                 |
+
+** started
+   :PROPERTIES:
+   :CUSTOM_ID: started
+   :END:
+
+Event key: =started=
+
+** stopped
+   :PROPERTIES:
+   :CUSTOM_ID: stopped
+   :END:
+
+Event key: =stopped=
+
+* Tasks
+  :PROPERTIES:
+  :CUSTOM_ID: tasks
+  :END:
+
+** add
+   :PROPERTIES:
+   :CUSTOM_ID: add
+   :END:
+
+Task key: =add=
+
+Add a file to IPFS
+
+*** Inputs
+    :PROPERTIES:
+    :CUSTOM_ID: inputs
+    :END:
+
+| *Name*   | *Key*   | *Type*     | *Description*   |
+|----------+---------+------------+-----------------|
+| *str*    | =str=   | =String=   |                 |
+
+*** Outputs
+    :PROPERTIES:
+    :CUSTOM_ID: outputs
+    :END:
+
+**** error
+     :PROPERTIES:
+     :CUSTOM_ID: error
+     :END:
+
+Output key: =error=
+
+| *Name*    | *Key*     | *Type*     | *Description*   |
+|-----------+-----------+------------+-----------------|
+| *error*   | =error=   | =String=   |                 |
+
+**** success
+     :PROPERTIES:
+     :CUSTOM_ID: success
+     :END:
+
+Output key: =success=
+
+| *Name*     | *Key*      | *Type*   | *Description*   |
+|------------+------------+----------+-----------------|
+| *result*   | =result=   | =Any=    |                 |
+
+** cat
+   :PROPERTIES:
+   :CUSTOM_ID: cat
+   :END:
+
+Task key: =cat=
+
+Retrieve a file from IPFS
+
+*** Inputs
+    :PROPERTIES:
+    :CUSTOM_ID: inputs-1
+    :END:
+
+| *Name*   | *Key*    | *Type*     | *Description*   |
+|----------+----------+------------+-----------------|
+| *path*   | =path=   | =String=   |                 |
+
+*** Outputs
+    :PROPERTIES:
+    :CUSTOM_ID: outputs-1
+    :END:
+
+**** error
+     :PROPERTIES:
+     :CUSTOM_ID: error-1
+     :END:
+
+Output key: =error=
+
+| *Name*    | *Key*     | *Type*     | *Description*   |
+|-----------+-----------+------------+-----------------|
+| *error*   | =error=   | =String=   |                 |
+
+**** success
+     :PROPERTIES:
+     :CUSTOM_ID: success-1
+     :END:
+
+Output key: =success=
+
+| *Name*   | *Key*    | *Type*     | *Description*   |
+|----------+----------+------------+-----------------|
+| *file*   | =file=   | =String=   |                 |
+
+** publish
+   :PROPERTIES:
+   :CUSTOM_ID: publish
+   :END:
+
+Task key: =publish=
+
+Publish a message to an IFPS pubsub topic
+
+*** Inputs
+    :PROPERTIES:
+    :CUSTOM_ID: inputs-2
+    :END:
+
+| *Name*      | *Key*       | *Type*     | *Description*   |
+|-------------+-------------+------------+-----------------|
+| *message*   | =message=   | =String=   |                 |
+| *topic*     | =topic=     | =String=   |                 |
+
+*** Outputs
+    :PROPERTIES:
+    :CUSTOM_ID: outputs-2
+    :END:
+
+**** error
+     :PROPERTIES:
+     :CUSTOM_ID: error-2
+     :END:
+
+Output key: =error=
+
+| *Name*    | *Key*     | *Type*     | *Description*   |
+|-----------+-----------+------------+-----------------|
+| *error*   | =error=   | =String=   |                 |
+
+**** success
+     :PROPERTIES:
+     :CUSTOM_ID: success-2
+     :END:
+
+Output key: =success=
+
+| *Name*      | *Key*       | *Type*     | *Description*   |
+|-------------+-------------+------------+-----------------|
+| *message*   | =message=   | =String=   |                 |
+| *topic*     | =topic=     | =String=   |                 |
+
+** stop
+   :PROPERTIES:
+   :CUSTOM_ID: stop
+   :END:
+
+Task key: =stop=
+
+Tell the IPFS node to stop
+
+*** Outputs
+    :PROPERTIES:
+    :CUSTOM_ID: outputs-3
+    :END:
+
+**** success
+     :PROPERTIES:
+     :CUSTOM_ID: success-3
+     :END:
+
+Output key: =success=
+
+| *Name*      | *Key*       | *Type*     | *Description*   |
+|-------------+-------------+------------+-----------------|
+| *message*   | =message=   | =String=   |                 |
+
+** subscribe
+   :PROPERTIES:
+   :CUSTOM_ID: subscribe
+   :END:
+
+Task key: =subscribe=
+
+Receive messages published using IPFS pubsub
+
+*** Inputs
+    :PROPERTIES:
+    :CUSTOM_ID: inputs-3
+    :END:
+
+| *Name*    | *Key*     | *Type*     | *Description*   |
+|-----------+-----------+------------+-----------------|
+| *topic*   | =topic=   | =String=   |                 |
+
+*** Outputs
+    :PROPERTIES:
+    :CUSTOM_ID: outputs-4
+    :END:
+
+**** error
+     :PROPERTIES:
+     :CUSTOM_ID: error-3
+     :END:
+
+Output key: =error=
+
+| *Name*    | *Key*     | *Type*     | *Description*   |
+|-----------+-----------+------------+-----------------|
+| *error*   | =error=   | =String=   |                 |
+
+**** success
+     :PROPERTIES:
+     :CUSTOM_ID: success-4
+     :END:
+
+Output key: =success=
+
+| *Name*    | *Key*     | *Type*     | *Description*   |
+|-----------+-----------+------------+-----------------|
+| *topic*   | =topic=   | =String=   |                 |

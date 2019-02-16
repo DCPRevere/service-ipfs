@@ -1,0 +1,104 @@
+name: service-ipfs
+sid: service-ipfs
+description: "Description of my service"
+tasks:
+
+  stop:
+    description: "Tell the IPFS node to stop"
+    inputs: {}
+    outputs:
+      success:
+        data:
+          message:
+            type: String
+
+  add:
+    description: "Add a file to IPFS"
+    inputs: 
+      str:
+        type: String
+    outputs:
+      success:
+        data:
+          result:
+            type: Any
+      error:
+        data:
+          error:
+            type: String
+
+  cat:
+    description: "Retrieve a file from IPFS"
+    inputs:
+      path:
+        type: String
+    outputs:
+      error:
+        data:
+          error:
+            type: String
+      success:
+        data:
+          file:
+            type: String
+
+  subscribe:
+    description: "Receive messages published using IPFS pubsub"
+    inputs:
+      topic:
+        type: String
+    outputs:
+      success:
+        data:
+          topic:
+            type: String
+
+      error:
+        data:
+          error:
+            type: String
+
+  publish:
+    description: "Publish a message to an IFPS pubsub topic"
+    inputs:
+      topic:
+        type: String
+      message:
+        type: String
+    outputs:
+      success:
+        data:
+          message:
+            type: String
+          topic:
+            type: String
+      error:
+        data:
+          error:
+            type: String
+
+events:
+
+  started:
+    data: {}
+
+  stopped:
+    data: {}
+
+  messageReceived:
+    data:
+      topic:
+        type: String
+      message:
+        type: String
+  
+
+configuration:
+  ports:
+    - "4002:4002"
+    - "4003:4003"
+    - "5002:5002"
+    - "9090:9090"
+    - "8080:8080"
+    - "4001:4001"
+    - "5001:5001"

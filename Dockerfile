@@ -1,0 +1,19 @@
+FROM node:10.15
+WORKDIR /app
+COPY ./package* ./
+
+EXPOSE 4002
+EXPOSE 4003
+EXPOSE 5002
+EXPOSE 9090
+
+EXPOSE 8080
+EXPOSE 8081
+
+EXPOSE 4001
+EXPOSE 5001
+
+RUN npm install
+
+COPY . .
+CMD [ "node", "index.js" ]

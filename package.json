@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "mesg-js": "^2.0.0",
+    "@liteflow/service": "^1.0.7",
     "ipfs": "^0.34.4"
   }
 }

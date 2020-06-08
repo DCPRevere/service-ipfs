@@ -1,4 +1,4 @@
-const mesg = require('mesg-js').service();
+const liteflow = new (require('@liteflow/service'))();
 
 const IPFS = require('ipfs');
 const ipfsOptions = {
@@ -12,7 +12,7 @@ const Readable = require('stream').Readable;
 
 node.on('ready', () => {
 
-  mesg.listenTask({
+  liteflow.listenTask({
 
     stop: (inputs, { success }) => {
       node.stop(() => {
@@ -70,7 +70,7 @@ node.on('ready', () => {
 
       const handler = (msg) => {
         console.log(`Received on topic ${topic} message: {msg}`);
-        mesg.emitEvent(
+        liteflow.emitEvent(
           'messageReceived',
           { topic: topic,
             message: msg.data.toString() });
@@ -100,7 +100,7 @@ node.on('ready', () => {
   }).on('error', error => console.error(error));
 
   // Emit an event signalling that the service has started
-  mesg.emitEvent('started', {})
+  liteflow.emitEvent('started', {})
     .catch((error) => console.error(error));
 
 });
@@ -110,7 +110,7 @@ node.on('error', error => {
 });
 
 node.on('stop', () => {
-  mesg.emitEvent('stopped', {})
+  liteflow.emitEvent('stopped', {})
     .catch(error => console.error(error));
 });
 
